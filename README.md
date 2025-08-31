@@ -1,9 +1,9 @@
-SmartPricing - Price Calculator
-Overview
+# SmartPricing - Price Calculator
+## Overview
 
 SmartPricing is a web-based price calculator designed to help businesses determine optimal selling prices based on purchase cost, desired profit margin, and quantity. It allows users to manage products, adjust profit margins, and clear the product list.
 
-Features
+## Features
 
 Add new products with name, purchase price, and quantity.
 
@@ -15,7 +15,7 @@ Remove products from the list.
 
 Clear all products from the list.
 
-Technologies Used
+## Technologies Used
 
 Frontend: HTML, CSS (Bootstrap 5), Thymeleaf
 
@@ -23,7 +23,7 @@ Backend: Java (Spring Boot)
 
 Database: MySQL
 
-Getting Started
+## Getting Started
 Prerequisites
 
 Java 17 or higher
@@ -50,7 +50,7 @@ mvn spring-boot:run
 
 Access the application at http://localhost:8080.
 
-Usage
+## Usage
 
 Add Product: Enter product name, purchase price, and quantity, then click "Add".
 
