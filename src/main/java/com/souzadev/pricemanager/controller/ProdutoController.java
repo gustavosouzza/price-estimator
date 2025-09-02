@@ -2,8 +2,9 @@ package com.souzadev.pricemanager.controller;
 
 
 import com.souzadev.pricemanager.models.entities.Produto;
+import com.souzadev.pricemanager.service.ExcelService;
 import com.souzadev.pricemanager.service.ProdutoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,16 +12,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.souzadev.pricemanager.repository.ProdutoRepository;
 
+import java.io.IOException;
+
 @Controller
 public class ProdutoController {
-    @Autowired
-    private ProdutoRepository produtoRepository;
 
-    @Autowired
-    private ProdutoService produtoService;
-
-
+    private final ProdutoRepository produtoRepository;
+    private final ProdutoService produtoService;
+    private final ExcelService excelService;
     private double margemlucro = 45.0;
+
+    public ProdutoController(ProdutoRepository produtoRepository,
+                             ProdutoService produtoService,
+                             ExcelService excelService) {
+        this.produtoRepository = produtoRepository;
+        this.produtoService = produtoService;
+        this.excelService = excelService;
+    }
+
+    @GetMapping("/produtos/export")
+    public void exportarExcel(HttpServletResponse response) throws IOException {
+        var produtos = produtoRepository.findAll(); // pega todos os produtos
+        excelService.exportarProdutosParaExcel(produtos, response);
+    }
 
     @GetMapping ({"/", "/produtos"})
     public String index(Model model) {
@@ -30,9 +44,7 @@ public class ProdutoController {
     }
 
     @PostMapping("/adicionar")
-    public String adicionarProduto(@RequestParam String nome,
-                                   @RequestParam double precoCompra,
-                                   @RequestParam int quantidade) {
+    public String adicionarProduto(@RequestParam String nome, @RequestParam double precoCompra, @RequestParam int quantidade) {
         System.out.println("Tentando adicionar produto: " + nome + ", " + precoCompra + ", " + quantidade);
         Produto p = produtoRepository.findByNomeIgnoreCase(nome);
         if (p != null) {
