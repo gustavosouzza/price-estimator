@@ -31,9 +31,12 @@
         <button type="submit" class="btn btn-primary">Adicionar</button>
     </form>
 
-    <form action="/limpar" method="post" class="mb-4">
-        <button type="submit" class="btn btn-danger">Limpar Lista</button>
-    </form>
+    <div class="d-flex justify-content-between mb-4">
+        <form action="/limpar" method="post">
+            <button type="submit" class="btn btn-danger">Limpar Lista</button>
+        </form>
+        <a href="/produtos/export" class="btn btn-success">Exportar para Excel</a>
+    </div>
 
     <h2>Relatório de Produtos</h2>
     <table class="table table-striped table-bordered">
