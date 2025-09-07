@@ -32,7 +32,7 @@ public class ProdutoController {
 
     @GetMapping("/produtos/export")
     public void exportarExcel(HttpServletResponse response) throws IOException {
-        var produtos = produtoRepository.findAll(); // pega todos os produtos
+        var produtos = produtoRepository.findAll();
         excelService.exportarProdutosParaExcel(produtos, response);
     }
 

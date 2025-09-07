@@ -31,3 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Ignorar arquivo com credenciais
+src/main/resources/application.properties
+
+# Ignorar arquivo de variáveis de ambiente local
+.env
+
+# Ignorar logs
+*.log
